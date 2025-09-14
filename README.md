@@ -66,3 +66,15 @@ FILE_FORMAT=MY_CSV_FORMAT;
 SHOW PIPES;
 ```
 ⚡ AUTO_INGEST=TRUE → Enables Snowpipe to listen to S3 event notifications (SQS) and load files instantly when uploaded.
+
+
+
+🛠️ Tech Stack
+
+❄️ Snowflake → Cloud Data Warehouse
+
+☁️ AWS S3 → External storage for CSV files
+
+⚡ Snowpipe → Continuous auto-ingestion
+
+💻 SQL → Data Definition & Queries
