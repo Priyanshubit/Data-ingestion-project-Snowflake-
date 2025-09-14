@@ -64,5 +64,5 @@ FROM @PATIENTS_AWS_STAGE
 FILE_FORMAT=MY_CSV_FORMAT;
 
 SHOW PIPES;
-
 ```
+⚡ AUTO_INGEST=TRUE → Enables Snowpipe to listen to S3 event notifications (SQS) and load files instantly when uploaded.
