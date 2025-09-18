@@ -69,7 +69,7 @@ SHOW STAGES;
 💡 Stage = Connection between Snowflake & AWS S3 📂
 
 
-### 🔹 6. Create Snowpipe for Auto-Ingestion
+### 🔹 5. Create Snowpipe for Auto-Ingestion
 
 ```sql
 // CREATE SNOWPIPE THAT RECOGNISES CDV WHICH ARE INGESTED FROM EXTERNAL SOURCE THE DATA INTO HEALTHCARE TABLE
@@ -86,7 +86,22 @@ SHOW PIPES;
 
 
 
-🛠️ Tech Stack
+### 🔹 6. Verifying that Everything went well
+
+```sql
+ALTER PIPE AWS_PIPE_HEALTHCARE REFRESH;
+
+SELECT SYSTEM$PIPE_STATUS('AWS_PIPE_HEALTHCARE');
+
+SELECT COUNT(*)
+FROM HEALTHCARE;
+
+SELECT *
+FROM HEALTHCARE;
+
+```
+
+###  🛠️ Tech Stack
 
 ❄️ Snowflake → Cloud Data Warehouse
 
