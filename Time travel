@@ -1,0 +1,47 @@
+## Time travel in Snowflake
+create database retention;
+
+//🔹 Step 1: Check / Set Retention Period
+CREATE OR REPLACE TABLE orders (
+  id INT, 
+  order_date DATE, 
+  amount NUMBER
+)
+DATA_RETENTION_TIME_IN_DAYS = 1;
+
+
+//🔹 Step 2: Insert Sample Data
+
+INSERT INTO ORDERS (id, order_date, amount)
+VALUES (201,'2025-09-02',499),
+       (202,'2025-09-10',399),
+       (203,'2025-09-12',299),
+       (204,'2025-09-15',799),
+       (205,'2025-09-22',899),
+       (206,'2025-09-25',199);
+
+
+//🔹 Step 3: Make a Change (Delete/Update/Drop)
+
+delete
+from orders
+where id=202;
+
+
+
+//🔹 Step 4: Query Past State
+
+
+SELECT * FROM orders AT(OFFSET => -180); -- state 1 min ago, Relative time (seconds) -- 
+
+SELECT * FROM orders AT(TIMESTAMP => '2025-09-19 10:30:00'); -- Specific time frame -- 
+
+
+//🔹 Step 5: Restore Data (Optional)
+
+INSERT INTO orders
+SELECT * FROM orders AT(OFFSET => -60) WHERE id = 102;  -- Re-insert from Time Travel query --
+
+
+CREATE OR REPLACE TABLE orders_restore CLONE orders   -- Clone the whole table as it was --
+  AT(OFFSET => -60);
